@@ -70,10 +70,13 @@ const images = [
 console.log(images);
 
 const gallery = document.querySelector('.gallery');
-images.forEach(image => {
+
+// Створюємо всі елементи галереї
+const galleryItems = images.map(image => {
   const li = document.createElement('li');
   const a = document.createElement('a');
   const img = document.createElement('img');
+
   li.classList.add('gallery-item');
   img.setAttribute('src', image.preview);
   img.setAttribute('data-source', image.original);
@@ -81,10 +84,15 @@ images.forEach(image => {
   img.classList.add('gallery-image');
   a.setAttribute('href', image.original);
   a.classList.add('gallery-link');
+
   a.appendChild(img);
   li.appendChild(a);
-  gallery.appendChild(li);
+
+  return li;
 });
+
+// Додаємо всі елементи в DOM однією операцією
+gallery.append(...galleryItems);
 
 // Ініціалізація SimpleLightbox після додавання елементів галереї
 new SimpleLightbox('.gallery a', {
